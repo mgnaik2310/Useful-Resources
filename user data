@@ -1,0 +1,52 @@
+// Simulating user data
+let lastActivityTime = new Date();
+let posts = [];
+
+// Function to update user's last activity time
+function updateLastUserActivityTime() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      lastActivityTime = new Date();
+      console.log('User activity time updated:', lastActivityTime);
+      resolve(lastActivityTime);
+    }, 1000);
+  });
+}
+
+// Function to create a new post
+function createPost(post) {
+  return new Promise((resolve) => {
+    // Simulating some asynchronous operation
+    setTimeout(() => {
+      posts.push(post);
+      console.log('Post created:', post);
+      resolve(posts);
+    }, 500);
+  });
+}
+
+// Function to delete the last post
+function deletePost() {
+  return new Promise((resolve) => {
+    // Simulating some asynchronous operation
+    setTimeout(() => {
+      const deletedPost = posts.pop();
+      console.log('Post deleted:', deletedPost);
+      resolve(posts);
+    }, 500);
+  });
+}
+
+// Example usage
+createPost({ title: 'First Post', content: 'Lorem ipsum' })
+  .then(() => updateLastUserActivityTime())
+  .then(() => createPost({ title: 'Second Post', content: 'Dolor sit amet' }))
+  .then(() => updateLastUserActivityTime())
+  .then(() => deletePost())
+  .then(() => {
+    console.log('Remaining Posts:', posts);
+    console.log('Final lastActivityTime:', lastActivityTime);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
